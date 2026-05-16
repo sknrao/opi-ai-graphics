@@ -1,0 +1,86 @@
+<style>
+.pillar-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+.p-label{font-size:11px;font-weight:500;text-align:center;padding:6px 8px;border-radius:6px 6px 0 0;width:100%;box-sizing:border-box}
+.p-body{width:100%;border-radius:0 0 10px 10px;border:0.5px solid var(--color-border-tertiary);padding:10px 8px;display:flex;flex-direction:column;gap:5px;box-sizing:border-box}
+.chip{border-radius:5px;padding:5px 8px;font-size:11px;font-weight:500;text-align:center;border:0.5px solid transparent}
+.arr{text-align:center;font-size:13px;color:var(--color-text-tertiary);line-height:1.2}
+.dpu-chip{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489}
+.out-chip{font-size:10px;text-align:center;padding:5px 8px;border-radius:5px;margin-top:2px}
+
+/* blue pillar */
+.ph1{background:#185FA5;color:#E6F1FB}
+.c1{background:#E6F1FB;border-color:#B5D4F4;color:#042C53}
+.o1{background:#E6F1FB;border-color:#B5D4F4;color:#042C53}
+/* teal pillar */
+.ph2{background:#0F6E56;color:#E1F5EE}
+.c2{background:#E1F5EE;border-color:#9FE1CB;color:#085041}
+.o2{background:#E1F5EE;border-color:#9FE1CB;color:#085041}
+/* amber pillar */
+.ph3{background:#854F0B;color:#FAEEDA}
+.c3{background:#FAEEDA;border-color:#FAC775;color:#633806}
+.o3{background:#FAEEDA;border-color:#FAC775;color:#633806}
+
+.airgap{font-size:9px;text-align:center;color:var(--color-text-tertiary);letter-spacing:0.05em;padding:2px 0}
+
+@media(prefers-color-scheme:dark){
+  .dpu-chip{background:#26215C;border-color:#534AB7;color:#CECBF6}
+  .c1{background:#042C53;border-color:#185FA5;color:#B5D4F4}
+  .o1{background:#042C53;border-color:#185FA5;color:#B5D4F4}
+  .c2{background:#04342C;border-color:#0F6E56;color:#9FE1CB}
+  .o2{background:#04342C;border-color:#0F6E56;color:#9FE1CB}
+  .c3{background:#412402;border-color:#854F0B;color:#FAC775}
+  .o3{background:#412402;border-color:#854F0B;color:#FAC775}
+}
+</style>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:1rem 0;align-items:start">
+
+<!-- Pillar 1 -->
+<div class="pillar-wrap">
+  <div class="p-label ph1" style="width:100%;box-sizing:border-box">Pillar 1 · Data movement &amp; training</div>
+  <div class="p-body">
+    <div class="chip c1">800G network fabric</div>
+    <div class="arr">↓</div>
+    <div class="chip dpu-chip">DPU / IPU</div>
+    <div class="arr">↙&nbsp;&nbsp;↘</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+      <div class="chip c1">GPU cluster<br><span style="font-weight:400;font-size:10px">RDMA/RoCEv2</span></div>
+      <div class="chip c1">NVMe-oF<br><span style="font-weight:400;font-size:10px">storage</span></div>
+    </div>
+    <div class="arr" style="font-size:10px;margin-top:2px">host CPU bypassed ✕</div>
+    <div class="out-chip o1">100% CPU freed for AI</div>
+  </div>
+</div>
+
+<!-- Pillar 2 -->
+<div class="pillar-wrap">
+  <div class="p-label ph2" style="width:100%;box-sizing:border-box">Pillar 2 · Inline inference &amp; security</div>
+  <div class="p-body">
+    <div class="chip c2">Client requests</div>
+    <div class="arr">↓</div>
+    <div class="chip dpu-chip">DPU / IPU</div>
+    <div class="arr">↓</div>
+    <div class="chip c2">NGINX · TLS · ML proxies</div>
+    <div class="arr">↓ response</div>
+    <div class="airgap">— — security air gap — —</div>
+    <div class="chip c2" style="opacity:0.7">Host CPU / GPU<br><span style="font-weight:400;font-size:10px">AI models (OpenVINO)</span></div>
+    <div class="out-chip o2">Infrastructure isolated from tenant</div>
+  </div>
+</div>
+
+<!-- Pillar 3 -->
+<div class="pillar-wrap">
+  <div class="p-label ph3" style="width:100%;box-sizing:border-box">Pillar 3 · Fleet mgmt &amp; virtualization</div>
+  <div class="p-body">
+    <div class="chip c3">OPI / Kubernetes</div>
+    <div class="arr">↓ OPI APIs</div>
+    <div class="chip dpu-chip">DPU / IPU</div>
+    <div class="arr">↓</div>
+    <div class="chip c3">BMC · Redfish · sZTP</div>
+    <div class="chip c3">Hypervisor · bare-metal</div>
+    <div class="chip c3">Pooled GPU / FPGA / NVMe</div>
+    <div class="out-chip o3">One control plane, any vendor</div>
+  </div>
+</div>
+
+</div>

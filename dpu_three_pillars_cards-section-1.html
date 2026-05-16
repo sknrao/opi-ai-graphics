@@ -1,0 +1,144 @@
+<style>
+.pillar{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);padding:0;overflow:hidden;display:flex;flex-direction:column}
+.p-head{padding:12px 14px 10px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.p-title{font-size:13px;font-weight:500;margin:0 0 2px}
+.p-sub{font-size:11px;color:var(--color-text-secondary);margin:0}
+.node-row{display:flex;flex-direction:column;gap:6px;padding:12px 14px}
+.node{border-radius:8px;padding:8px 10px;border:0.5px solid transparent}
+.node-title{font-size:12px;font-weight:500;margin:0 0 2px}
+.node-desc{font-size:11px;margin:0;opacity:0.85}
+.arrow-down{text-align:center;font-size:16px;color:var(--color-text-tertiary);line-height:1;margin:-2px 0}
+.outcome{margin:auto 14px 12px;border-radius:6px;padding:7px 10px;border:0.5px solid transparent}
+.outcome p{font-size:11px;margin:0;font-weight:500}
+.dpu{background:#EEEDFE;border-color:#AFA9EC}
+.dpu .node-title{color:#3C3489}
+.dpu .node-desc{color:#534AB7}
+/* teal */
+.nt{background:#E1F5EE;border-color:#9FE1CB}.nt .node-title{color:#085041}.nt .node-desc{color:#0F6E56}
+/* amber */
+.na{background:#FAEEDA;border-color:#FAC775}.na .node-title{color:#633806}.na .node-desc{color:#854F0B}
+/* gray */
+.ng{background:var(--color-background-secondary);border-color:var(--color-border-tertiary)}.ng .node-title{color:var(--color-text-primary)}.ng .node-desc{color:var(--color-text-secondary)}
+/* blue */
+.nb{background:#E6F1FB;border-color:#B5D4F4}.nb .node-title{color:#042C53}.nb .node-desc{color:#185FA5}
+/* outcome colors */
+.oc-blue{background:#E6F1FB;border-color:#B5D4F4}.oc-blue p{color:#042C53}
+.oc-teal{background:#E1F5EE;border-color:#9FE1CB}.oc-teal p{color:#085041}
+.oc-amber{background:#FAEEDA;border-color:#FAC775}.oc-amber p{color:#633806}
+/* dark mode overrides */
+@media(prefers-color-scheme:dark){
+  .dpu{background:#26215C;border-color:#534AB7}.dpu .node-title{color:#CECBF6}.dpu .node-desc{color:#AFA9EC}
+  .nt{background:#04342C;border-color:#085041}.nt .node-title{color:#9FE1CB}.nt .node-desc{color:#5DCAA5}
+  .na{background:#412402;border-color:#854F0B}.na .node-title{color:#FAC775}.na .node-desc{color:#EF9F27}
+  .nb{background:#042C53;border-color:#185FA5}.nb .node-title{color:#B5D4F4}.nb .node-desc{color:#85B7EB}
+  .oc-blue{background:#042C53;border-color:#185FA5}.oc-blue p{color:#B5D4F4}
+  .oc-teal{background:#04342C;border-color:#085041}.oc-teal p{color:#9FE1CB}
+  .oc-amber{background:#412402;border-color:#854F0B}.oc-amber p{color:#FAC775}
+}
+</style>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:1rem 0">
+
+<!-- Pillar 1 -->
+<div class="pillar">
+  <div class="p-head" style="background:#E6F1FB">
+    <p class="p-title" style="color:#042C53">Pillar 1</p>
+    <p class="p-sub" style="color:#185FA5">Supporting AI — data movement &amp; training</p>
+  </div>
+  <div class="node-row">
+    <div class="node nt">
+      <p class="node-title">800G network fabric</p>
+      <p class="node-desc">Carries massive elephant flows from AI training jobs</p>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="node dpu">
+      <p class="node-title">DPU / IPU — data engine</p>
+      <p class="node-desc">Executes RDMA/RoCEv2, NVMe-oF, congestion control in hardware</p>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="node na">
+      <p class="node-title">GPU cluster</p>
+      <p class="node-desc">Zero-copy transfers via RDMA — no CPU in the data path</p>
+    </div>
+    <div class="node na">
+      <p class="node-title">NVMe-oF storage</p>
+      <p class="node-desc">Direct access with inline compression &amp; deduplication</p>
+    </div>
+    <div class="node ng">
+      <p class="node-title">Host CPU — bypassed</p>
+      <p class="node-desc">Completely removed from the network/storage data path</p>
+    </div>
+  </div>
+  <div class="outcome oc-blue">
+    <p>✓ 100% of host CPU freed for AI compute</p>
+  </div>
+</div>
+
+<!-- Pillar 2 -->
+<div class="pillar">
+  <div class="p-head" style="background:#E1F5EE">
+    <p class="p-title" style="color:#085041">Pillar 2</p>
+    <p class="p-sub" style="color:#0F6E56">Executing AI — inline inference &amp; security</p>
+  </div>
+  <div class="node-row">
+    <div class="node ng">
+      <p class="node-title">Incoming client requests</p>
+      <p class="node-desc">Edge sensors, API calls, external traffic</p>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="node dpu">
+      <p class="node-title">DPU / IPU — execution engine</p>
+      <p class="node-desc">Runs NGINX Plus proxy, TLS termination, L4/L7 load balancing, anomaly detection</p>
+    </div>
+    <div class="arrow-down">↓ ↑</div>
+    <div class="node nt">
+      <p class="node-title">Inline ML processing</p>
+      <p class="node-desc">OpenVINO proxies, local accelerators — instant response without touching host</p>
+    </div>
+    <div style="text-align:center;font-size:10px;color:var(--color-text-tertiary);padding:2px 0;letter-spacing:0.04em">— — — security air gap — — —</div>
+    <div class="node nb">
+      <p class="node-title">Host CPU &amp; GPU</p>
+      <p class="node-desc">AI model inference (OpenVINO) — fully isolated from infrastructure layer</p>
+    </div>
+  </div>
+  <div class="outcome oc-teal">
+    <p>✓ Infrastructure isolated from tenant AI workloads</p>
+  </div>
+</div>
+
+<!-- Pillar 3 -->
+<div class="pillar">
+  <div class="p-head" style="background:#FAEEDA">
+    <p class="p-title" style="color:#633806">Pillar 3</p>
+    <p class="p-sub" style="color:#854F0B">Infrastructure control — fleet mgmt &amp; virtualization</p>
+  </div>
+  <div class="node-row">
+    <div class="node ng">
+      <p class="node-title">OPI / Kubernetes control plane</p>
+      <p class="node-desc">Sends vendor-neutral OPI API commands to DPU fleet</p>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="node dpu">
+      <p class="node-title">DPU / IPU — control hub</p>
+      <p class="node-desc">Autonomous management endpoint, independent of host CPU</p>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="node na">
+      <p class="node-title">Out-of-band management</p>
+      <p class="node-desc">BMC / Redfish / IPMI — telemetry, sZTP, firmware updates</p>
+    </div>
+    <div class="node na">
+      <p class="node-title">Virtualization offload</p>
+      <p class="node-desc">ESXi / bare-metal-as-a-service, tenant isolation enforced on DPU</p>
+    </div>
+    <div class="node na">
+      <p class="node-title">Resource disaggregation</p>
+      <p class="node-desc">Pools GPUs, FPGAs, NVMe across servers for dynamic allocation</p>
+    </div>
+  </div>
+  <div class="outcome oc-amber">
+    <p>✓ Single control plane for mixed-vendor DPU fleet</p>
+  </div>
+</div>
+
+</div>

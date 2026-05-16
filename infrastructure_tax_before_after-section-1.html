@@ -1,0 +1,53 @@
+<div style="padding:1rem 0">
+<h2 class="sr-only">CPU utilization before and after DPU offload: eliminating the infrastructure tax</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px">
+
+  <!-- Before -->
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;border:0.5px solid var(--color-border-tertiary)">
+    <p style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0 0 14px">Before DPU offload</p>
+    <!-- Stacked bar -->
+    <div style="display:flex;flex-direction:column;gap:2px;border-radius:8px;overflow:hidden;height:200px">
+      <div style="background:#E24B4A;flex:0 0 38%;display:flex;align-items:center;justify-content:center">
+        <span style="font-size:12px;font-weight:500;color:#FCEBEb">Infrastructure tax 35%</span>
+      </div>
+      <div style="background:#FAC775;flex:0 0 37%;display:flex;align-items:center;justify-content:center">
+        <span style="font-size:12px;font-weight:500;color:#412402">Network/storage mgmt 37%</span>
+      </div>
+      <div style="background:#B5D4F4;flex:1;display:flex;align-items:center;justify-content:center">
+        <span style="font-size:12px;font-weight:500;color:#042C53">AI workload ~28%</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:10px 0 0;text-align:center">Only ~28% of CPU for actual AI</p>
+  </div>
+
+  <!-- After -->
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;border:0.5px solid var(--color-border-tertiary)">
+    <p style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0 0 14px">After DPU offload</p>
+    <div style="display:flex;flex-direction:column;gap:2px;border-radius:8px;overflow:hidden;height:200px">
+      <div style="background:#9FE1CB;flex:0 0 5%;display:flex;align-items:center;justify-content:center">
+        <span style="font-size:11px;font-weight:500;color:#04342C">Mgmt &lt;5%</span>
+      </div>
+      <div style="background:#378ADD;flex:1;display:flex;align-items:center;justify-content:center">
+        <span style="font-size:12px;font-weight:500;color:#E6F1FB">AI workload ~95%</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:10px 0 0;text-align:center">~95% of CPU freed for AI</p>
+  </div>
+</div>
+
+<!-- Supporting stats row -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;text-align:center;border:0.5px solid var(--color-border-tertiary)">
+    <p style="font-size:22px;font-weight:500;color:var(--color-text-danger);margin:0">30–40%</p>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:4px 0 0">CPU cycles lost to<br>infrastructure overhead</p>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;text-align:center;border:0.5px solid var(--color-border-tertiary)">
+    <p style="font-size:22px;font-weight:500;color:var(--color-text-warning);margin:0">40–75%</p>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:4px 0 0">AI training time lost to<br>GPU-to-GPU network comms</p>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;text-align:center;border:0.5px solid var(--color-border-tertiary)">
+    <p style="font-size:22px;font-weight:500;color:var(--color-text-success);margin:0">20–25%</p>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:4px 0 0">AI workload efficiency gain<br>with OPI-standard offload</p>
+  </div>
+</div>
+</div>
