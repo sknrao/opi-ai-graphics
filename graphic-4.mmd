@@ -1,0 +1,14 @@
+flowchart TD
+    subgraph Traditional SmartNIC [Legacy CPU-Centric SmartNIC]
+        direction TB
+        A[Network Port] -->|Traffic| B[Embedded ARM Cores]
+        B -->|Processed Traffic| C[Host CPU / Memory]
+        B -.->|Bottleneck| B
+    end
+
+    subgraph Modern DPU [Modern Programmable Silicon DPU]
+        direction TB
+        D[Network Port] -->|Traffic| E{P4 Programmable MPUs\n& Packet Buffer}
+        E -->|Direct Data Placement| F[Host CPU / GPU Memory]
+        E -.->|Exceptions Only| G[Embedded ARM Cores\nControl Plane]
+    end

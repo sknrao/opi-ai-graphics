@@ -1,0 +1,63 @@
+flowchart TD
+    %% Main Container
+    subgraph AI_Data_Center [The Three Pillars of DPUs in the AI Data Center]
+        direction LR
+
+        %% Pillar 1: Supporting AI
+        subgraph Pillar_1 [Pillar 1: Supporting AI \n Data Movement & Training]
+            direction TB
+            Fabric1((800G Network\nFabric))
+            DPU1{DPU / IPU\nData Engine}
+            GPU_Cluster[(GPU Cluster)]
+            Storage[(NVMe-oF Storage)]
+            CPU1[Host CPU]
+
+            Fabric1 == Elephant Flows ==> DPU1
+            DPU1 == RDMA / RoCEv2 ==> GPU_Cluster
+            DPU1 == Direct Access ==> Storage
+            DPU1 -. Bypasses .-> CPU1
+            
+            classDef support fill:#e1f5fe,stroke:#333,stroke-width:2px;
+            class Pillar_1 support;
+        end
+
+        %% Pillar 2: Executing AI
+        subgraph Pillar_2 [Pillar 2: Executing AI \n Inline Inference & Security]
+            direction TB
+            Client((Edge Sensors /\nClient Requests))
+            DPU2{DPU / IPU\nExecution Engine}
+            ML_Engine[Local Processing:\n- ML Accelerators\n- OpenVINO Proxies\n- Anomaly Detection]
+            CPU2[Host CPU & GPU]
+
+            Client == Incoming Data ==> DPU2
+            DPU2 == 1. Inline Processing ==> ML_Engine
+            ML_Engine == 2. Instant Response ==> Client
+            DPU2 ===|Security Air Gap| CPU2
+            
+            classDef execute fill:#e8f5e9,stroke:#333,stroke-width:2px;
+            class Pillar_2 execute;
+        end
+
+        %% Pillar 3: Infrastructure Control
+        subgraph Pillar_3 [Pillar 3: Infrastructure Control \n Fleet Mgmt & Virtualization]
+            direction TB
+            Orchestrator((OPI / Kubernetes\nControl Plane))
+            DPU3{DPU / IPU\nControl Hub}
+            BMC[Out-of-Band Mgmt\nBMC / Redfish / IPMI]
+            Hypervisor[Virtualization:\nBare-Metal / ESXi]
+            Pool[Pooled Heterogeneous\nCompute & Storage]
+
+            Orchestrator == OPI APIs ==> DPU3
+            DPU3 == Telemetry & sZTP ==> BMC
+            DPU3 == Tenant Isolation ==> Hypervisor
+            DPU3 == Resource Disaggregation ==> Pool
+            
+            classDef control fill:#fff3e0,stroke:#333,stroke-width:2px;
+            class Pillar_3 control;
+        end
+    end
+
+    %% Styling
+    style DPU1 fill:#bbf,stroke:#333,stroke-width:3px,color:#000
+    style DPU2 fill:#bbf,stroke:#333,stroke-width:3px,color:#000
+    style DPU3 fill:#bbf,stroke:#333,stroke-width:3px,color:#000

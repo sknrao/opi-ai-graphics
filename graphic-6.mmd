@@ -1,0 +1,22 @@
+flowchart LR
+    subgraph Server A
+        GPU1[(GPU Memory)] --> DPU1{DPU\nPacket Spray}
+    end
+
+    subgraph Network Fabric
+        DPU1 -->|Packet 1| SW1[Spine Switch 1]
+        DPU1 -->|Packet 2| SW2[Spine Switch 2]
+        DPU1 -->|Packet 3| SW3[Spine Switch 3]
+        DPU1 -->|Packet 4| SW4[Spine Switch 4]
+    end
+
+    subgraph Server B
+        SW1 --> DPU2{DPU\nIn-order Delivery}
+        SW2 --> DPU2
+        SW3 --> DPU2
+        SW4 --> DPU2
+        DPU2 --> GPU2[(GPU Memory)]
+    end
+    
+    style DPU1 fill:#bbf,stroke:#333,stroke-width:2px
+    style DPU2 fill:#bbf,stroke:#333,stroke-width:2px

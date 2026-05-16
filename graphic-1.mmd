@@ -1,0 +1,32 @@
+flowchart LR
+    A[Monolithic] -->|Virtualization| B[Software-Defined\nDatacenter]
+    B -->|Add GPUs| C[GPU-Accelerated\nComputer]
+    C -->|Add DPU/IPU| D[DPU-Accelerated\nData Center]
+
+    subgraph Phase 1
+        A1[Apps & OS on CPU]
+    end
+
+    subgraph Phase 2
+        B1[Apps]
+        B2[Hypervisor]
+        B3[CPU]
+        B1 --> B2 --> B3
+    end
+
+    subgraph Phase 3
+        C1[Apps]
+        C2[CPU]
+        C3[GPU]
+        C2 <-->|PCIe| C3
+    end
+
+    subgraph Phase 4: Data-Centric
+        D1[Apps on CPU/GPU]
+        D2{DPU / IPU}
+        D3[Network Fabric]
+        D4[Storage]
+        D2 === D1
+        D2 === D3
+        D2 === D4
+    end
